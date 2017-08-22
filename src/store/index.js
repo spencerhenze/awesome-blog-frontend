@@ -1,11 +1,16 @@
 import $ from 'jquery'
 
 // PRIVATE PARTS
-var state = {
-    blogs: []
-}
 
 // PUBLIC PARTS
+var store = new vuex.Store({
+    state: {
+        blogs: []
+    }
+
+
+})
+
 var store = {
     state: state,
     search(query) {
@@ -20,7 +25,7 @@ var store = {
     },
 
     getBlogs() {
-        $.get('//localhost:3000/api/blogs') 
+        $.get('//localhost:3000/api/blogs')
             .then((res) => {
                 console.log(res)
                 state.blogs = res
@@ -42,7 +47,7 @@ var store = {
             })
             .catch(() => console.log('error'))
     }
-        // state.blogs.push(blog)   this is for saving a local copy. We are using a database because we are awesome.
+    // state.blogs.push(blog)   this is for saving a local copy. We are using a database because we are awesome.
 }
 
-export { store }
+export default store

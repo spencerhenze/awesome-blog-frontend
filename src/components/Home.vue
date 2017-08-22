@@ -12,16 +12,16 @@
                 msg: 'Welcome to Your Vue.js App'
             }
         },
+        computed: {
+            blogs(){
+                return this.$store.state.blogs;
+            }
+        },
+
         //LIFECYCLE HOOKS
         mounted() {
             console.log("WE ARE ON THE HOME PAGE NOW")
         },
-        beforeDestroy() {
-            console.log("GOOD BYE HOME")
-        },
-        destroyed() {
-            console.log("THE HOME COMPONENT IS GONE")
-        }
     }
 </script>
 
