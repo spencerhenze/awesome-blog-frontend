@@ -1,30 +1,85 @@
 import $ from 'jquery'
 
+var ip = "//localhost:3000"
 // PRIVATE PARTS
 
 // PUBLIC PARTS
 var store = new vuex.Store({
     state: {
-        blogs: []
+        blogs: [],
+        activeBlog: {}
     }
 
 
 })
 
 var store = {
-    state: state,
-    search(query) {
-        var base = "mongodb://student:student@ds153113.mlab.com:53113/blog_db_henze"
-        var url = `${base}=${query}`
+    mutations: {
+        addBlog(state, newBlog) {
+            state.blogs.push(newBlog)
+        },
 
-        return new Promise(function (resolve, reject) {
-            $.get(url)
-                .then(data => { resolve(data) })
-                .catch(error => { reject(error) });
-        })
+        updateBlogs(state, blogs) {
+            state.blogs = blogs;
+        },
+        
+        setActiveBlog(state, blog) {
+            state.activeBlog = blog;
+        }
     },
+    actions: {
+        createBlog({ commit, dispatch }, blog) {
+            $.post(ip + '/api/blogs', blog).then(actualBlog => {
+                commit('addBlog', actualBlog)
+            }).fail(err => {
+                console.error(err)
+            })
+        },
 
-    getBlogs() {
+        updateBlog({commit, dispatch}, updatedBlog) {
+            $.ajax({
+                url: ip + '/api/blogs/' + updatedBlog._id,
+                method: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(updatedBlog)
+            }).then(res => {
+                dispatch.getBlogs()
+            })
+            .fail(err => {
+                console.error(err)
+            })
+        },
+
+        getBlogs({commit, dispatch}, blogs) {
+            $.get(ip + "/api/blogs").then(blogs => {
+                commit('updateBlogs', blogs)
+            })
+        },
+
+        getBlog({commit, dispatch}, blogId) {
+            $.get(ip + "/api/blogs/" + blogId).then(blog => {
+                commit('setActiveBlog', blog)
+            })
+        },
+
+
+    }
+
+
+
+        // state: state,
+        // search(query) {
+        //     var base = "mongodb://student:student@ds153113.mlab.com:53113/blog_db_henze"
+        //     var url = `${base}=${query}`
+
+        //     return new Promise(function (resolve, reject) {
+        //         $.get(url)
+        //             .then(data => { resolve(data) })
+        //             .catch(error => { reject(error) });
+        //     })
+        // },
+
+        getBlogs() {
         $.get('//localhost:3000/api/blogs')
             .then((res) => {
                 console.log(res)

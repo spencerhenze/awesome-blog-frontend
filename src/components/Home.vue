@@ -17,6 +17,14 @@
                 return this.$store.state.blogs;
             }
         },
+        methods: {
+            createNewBlog() {
+                var newBlog = {
+                    //pull in user input here to build the new blog object to pass to the store
+                }
+                this.$store.dispatch("createBlog", newBlog); // Is this syntax correct?
+            }
+        },
 
         //LIFECYCLE HOOKS
         mounted() {
