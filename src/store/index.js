@@ -73,8 +73,8 @@ var store = new vuex.Store({
         },
 
         setActiveBlog(state, blog) {
-            debugger
             state.activeBlog = blog;
+            debugger
         }
     },
 
@@ -111,7 +111,7 @@ var store = new vuex.Store({
         },
 
         // get a blog by id
-        getBlog({ commit, dispatch }, blogId) {
+        getBlogById({ commit, dispatch }, blogId) {
             $.get(ip + "/api/blogs/" + blogId).then(blog => {
                 commit('setActiveBlog', blog)
             })

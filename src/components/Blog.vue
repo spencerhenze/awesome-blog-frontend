@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Blog {{ title }}</h1>
+        <h1>Blog {{ activeBlog.title }}</h1>
     </div>
 </template>
 
@@ -17,14 +17,12 @@
         },
 
         mounted() {
-            store.getBlogById(this.$route.params.blogId)
+            this.$store.dispatch("getBlogById", this.$route.params.blogId)
         },
 
         computed: {
             activeBlog() {
-                return {
-                    title: this.$store.activeBlog.title
-                }
+                return this.$store.state.activeBlog;
             }
         }
     }

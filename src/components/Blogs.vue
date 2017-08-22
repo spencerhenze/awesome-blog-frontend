@@ -23,12 +23,6 @@
     data() {
       return {
       }
-      // Does this go in the return or is it just an empty array?
-      // blogs: [{
-      //   id: store.blogs._id,
-      //   title: store.blogs._id.title,
-      //   body: store.blogs._id.body
-      // }]
     },
     computed: {
       blogs() {
