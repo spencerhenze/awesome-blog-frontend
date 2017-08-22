@@ -3,7 +3,7 @@
     <div>
       <!-- THIS IS YOUR NEW <a> -->
       <router-link :to="{name: 'Home'}">Home</router-link> 
-      <!-- <router-link :to="{name: 'Products'}">Products</router-link>  -->
+      <router-link :to="{name: 'Blogs'}">Blogs</router-link> 
     </div>
     <hr>
     <router-view></router-view>

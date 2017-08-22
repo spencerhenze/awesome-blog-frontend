@@ -1,6 +1,13 @@
 <template>
     <div>
         <h1>Vue is fun</h1>
+        <!--insert wysiwug here  -->
+        <div>
+            <form id="blog-form" @submit.prevent="createNewBlog()">
+                 <input type="text" placeholder="Title" v-model="blogTitle"> 
+                 <input type="text-area" placeholder="enter blog text here" v-model="blogBody">
+            </form>
+        </div>
         <button @click="createNewBlog">CREATE</button>
         <div v-if="blogs.length > 0">
             <ul>
@@ -20,7 +27,9 @@
         name: 'home',
         data() {
             return {
-                msg: 'Welcome to Your Vue.js App'
+                msg: 'Welcome to Your Vue.js App',
+                blogTitle: '',
+                blogBody: ''
             }
         },
         computed: {
@@ -31,20 +40,24 @@
         methods: {
             createNewBlog() {
                 var newBlog = {
-                    //pull in user input here to build the new blog object to pass to the store
+                    title: this.blogTitle,
+                    body: this.blogBody
                 }
-                this.$store.dispatch("createBlog", newBlog); // Is this syntax correct?
+                this.$store.dispatch("createBlog", newBlog);
             }
         },
 
         //LIFECYCLE HOOKS
         mounted() {
-            console.log("WE ARE ON THE HOME PAGE NOW")
+            this.$store.dispatch("getBlogs")
         },
     }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+    #blog-form{
+        display: flex;
+        flex-direction: column;
+    }
 </style>
