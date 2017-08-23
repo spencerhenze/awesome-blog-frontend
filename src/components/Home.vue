@@ -33,7 +33,8 @@
             return {
                 msg: 'Welcome to Your Vue.js App',
                 blogTitle: '',
-                blogBody: ''
+                blogBody: '',
+                myHTML: ''
             }
         },
         computed: {
