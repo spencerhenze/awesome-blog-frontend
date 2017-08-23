@@ -4,6 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './routes'
 import store from './store'
+import wysiwyg from 'vue-wysiwyg'
+
+
+Vue.use(wysiwyg, {});
 
 Vue.config.productionTip = false
 

@@ -1,6 +1,7 @@
 <template>
     <div>
-        <h1>Blog {{ activeBlog.title }}</h1>
+        <h1>{{ activeBlog.title }}</h1>
+        <p>{{activeBlog.body}}</p>
     </div>
 </template>
 
@@ -29,4 +30,7 @@
 
 </script>
 
-<style></style>
+<style>
+
+    
+</style>

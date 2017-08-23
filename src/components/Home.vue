@@ -1,14 +1,18 @@
 <template>
+    <!-- this is all being injected into a col-xs-12 inside of a parent row -->
     <div>
         <h1>Vue is fun</h1>
-        <!--insert wysiwug here  -->
         <div>
             <form id="blog-form" @submit.prevent="createNewBlog()">
-                 <input type="text" placeholder="Title" v-model="blogTitle"> 
-                 <input type="text-area" placeholder="enter blog text here" v-model="blogBody">
+                <label for="titleInput">Blog Title:</label>
+                <input name="titleInput" type="text" placeholder="Title" v-model="blogTitle">
+                <label for="blog-editor">Edit Blog:</label>
+                <wysiwyg id="blog-editor" v-model="myHTML"></wysiwyg>
+                <button class="btn btn-primary" type="submit">Post</button>
+                <!-- <input type="text-area" placeholder="enter blog text here" v-model="blogBody"> -->
             </form>
         </div>
-        <button @click="createNewBlog">CREATE</button>
+        <!-- <button @click="createNewBlog">CREATE</button> -->
         <div v-if="blogs.length > 0">
             <ul>
                 <li v-for="blog in blogs">
@@ -33,7 +37,7 @@
             }
         },
         computed: {
-            blogs(){
+            blogs() {
                 return this.$store.state.blogs;
             }
         },
@@ -41,7 +45,7 @@
             createNewBlog() {
                 var newBlog = {
                     title: this.blogTitle,
-                    body: this.blogBody
+                    body: this.myHTML
                 }
                 this.$store.dispatch("createBlog", newBlog);
             }
@@ -52,11 +56,14 @@
             this.$store.dispatch("getBlogs")
         },
     }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    #blog-form{
+    @import "~vue-wysiwyg/dist/vueWysiwyg.css";
+
+    #blog-form {
         display: flex;
         flex-direction: column;
     }
