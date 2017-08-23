@@ -27,7 +27,6 @@ var store = new vuex.Store({
 
         setActiveBlog(state, blog) {
             state.activeBlog = blog;
-            debugger
         }
     },
 
